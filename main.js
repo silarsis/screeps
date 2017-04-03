@@ -1,6 +1,7 @@
 var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
+var roleSpawn = require('role.spawn');
 
 function creepRole(creep) {
     if (creep.memory.role == 'upgrader') {
@@ -27,6 +28,10 @@ module.exports.loop = function () {
         if(closestHostile) {
             tower.attack(closestHostile);
         }
+    }
+
+    for (var name in Game.spawns) {
+        roleSpawn.run(Game.spawns[name]);
     }
 
     for(var name in Game.creeps) {
