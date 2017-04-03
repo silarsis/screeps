@@ -42,6 +42,6 @@ function requiredCarryingCapacity() {
 module.exports = {
     /** @param {Spawn} spawn **/
     run: function(spawn) {
-        spawn.createCreep([MOVE, CARRY, WORK], {role: 'harvester'});
+        spawn.createCreep([MOVE, CARRY, WORK], {role: 'creeper', mode: 'harvest'});
     }
 };
