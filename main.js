@@ -2,8 +2,12 @@ var roleHarvester = require('role.harvester');
 var roleUpgrader = require('role.upgrader');
 var roleBuilder = require('role.builder');
 var roleSpawn = require('role.spawn');
+var roleCreeper = require('role.creeper');
 
 function creepRole(creep) {
+    if (creep.memory.role == 'creeper') {
+        return roleCreeper
+    }
     if (creep.memory.role == 'upgrader') {
         return roleUpgrader
     }
