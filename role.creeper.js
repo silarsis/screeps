@@ -27,20 +27,22 @@ var roleCreeper = {
                 }
             } else {
                 creep.memory.mode = 'working';
+                creep.say('🚧 working');
             }
         }
         if (creep.memory.mode == 'working') {
             if (creep.carry.energy == 0) {
                 creep.memory.mode = 'harvest';
+                creep.say('🔄 harvest');
             } else {
                 var target = null;
                 if (target = nearestEnergySink(creep)) {
                     if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+                        creep.moveTo(target, {visualizePathStyle: {stroke: '#ffff00'}});
                     }
                 } else if (target = nearestConstructionSite(creep)) {
                     if(creep.build(target) == ERR_NOT_IN_RANGE) {
-                        creep.moveTo(target, {visualizePathStyle: {stroke: '#ffffff'}});
+                        creep.moveTo(target, {visualizePathStyle: {stroke: '#ffaa00'}});
                     }
                 } else {
                     if(creep.upgradeController(target) == ERR_NOT_IN_RANGE) {
