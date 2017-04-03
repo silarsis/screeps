@@ -2,7 +2,7 @@ function currentCarryingCapacity() {
     return _.sum(Game.creeps).map(function (creep) {
         return creep.carryCapacity;
     });
-}
+};
 
 let bodyCost = {
     MOVE: 50,
@@ -13,17 +13,17 @@ let bodyCost = {
     HEAL: 250,
     CLAIM: 600,
     TOUGH: 10
-}
+};
 
 function creepCreateCost(creep) {
     return _.sum(creep.body).map(function (part) {
         return bodyCost[part.type];
     });
-}
+};
 
 function currentEnergyPerTick() {
     return currentCarryingCapacity() / timeToCarry;
-}
+};
 
 function requiredCarryingCapacity() {
     // Cost to regen all creeps plus add a new one,
@@ -37,40 +37,11 @@ function requiredCarryingCapacity() {
     }) + newSpawnCost;
     var energyPerTickNeeded = totalSpawnCost / timeToCarry;
     return totalSpawnCost / timeToCarry;
-}
-
-function spawnNewCreeper() {
-    // Currently hard-coded on type of creeper
-    if (Game.spawns['Spawn1'].
-}
+};
 
 module.exports = {
-
     /** @param {Spawn} spawn **/
     run: function(spawn) {
-
-        if (currentCarryingCapacity() < requiredCarryingCapacity()) {
-            spawnNewCreeper();
-        }
-        if(creep.memory.upgrading && creep.carry.energy == 0) {
-            creep.memory.upgrading = false;
-            creep.say('🔄 harvest');
-        }
-        if(!creep.memory.upgrading && creep.carry.energy == creep.carryCapacity) {
-            creep.memory.upgrading = true;
-            creep.say('⚡ upgrade');
-        }
-
-        if(creep.memory.upgrading) {
-            if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
-            }
-        }
-        else {
-            var sources = creep.room.find(FIND_SOURCES);
-            if(creep.harvest(sources[0]) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(sources[0], {visualizePathStyle: {stroke: '#ffaa00'}});
-            }
-        }
+        spawn.createCreep([MOVE, CARRY, WORK], {role: 'harvester'});
     }
 };
