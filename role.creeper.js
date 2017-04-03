@@ -11,7 +11,7 @@ function nearestEnergySink(creep) {
 
 function nearestConstructionSite(creep) {
     var constructionSites = creep.room.find(FIND_CONSTRUCTION_SITES);
-    if (contructionSites.length) { return constructionSites[0] } else { return null };
+    if (constructionSites.length) { return constructionSites[0] } else { return null };
 }
 
 var roleCreeper = {
