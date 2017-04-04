@@ -42,7 +42,7 @@ function requiredCarryingCapacity() {
 module.exports = {
     /** @param {Spawn} spawn **/
     run: function(spawn) {
-        if (Object.length(Game.creeps).length < 5) {
+        if (Object.keys(Game.creeps).length < 5) {
             spawn.createCreep([MOVE, CARRY, WORK], {role: 'creeper', mode: 'harvest'});
         }
     }
